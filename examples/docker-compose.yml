@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  
+  minio-app:
+    image: tiredofit/minio
+    container_name: minio-app
+    volumes:
+    - ./data:/data
+    - ./config:/config
+    environment:
+    - MINIO_ACCESS_KEY=supersecretaccesskey
+    - MINIO_SECRET_KEY=superdupersecret
+
+    - ZABBIX_HOSTNAME=minio-app
+
+    networks:
+    - internal
+    - services
+    restart: always
+
+networks:
+  internal:
+    external: false
+  services:
+    external: true
